@@ -1,95 +1,69 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from './page.module.css';
+
+const images = [
+  "/landing.png",
+  "/landing-image-1.jpg",
+  "/OIP.jpeg",
+  "/landing-image-2.jpg",
+];
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const [currentImage, setCurrentImage] = useState(0);
 
-      <div className={styles.center}>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative flex flex-col items-center h-screen w-screen overflow-x-hidden">
+      <div className="absolute inset-0 w-full h-full">
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src={images[currentImage]}
+          alt="KAR Consultants"
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg shadow-lg"
         />
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="absolute left-0 top-20 ml-4 sm:ml-10 text-black font-bold p-4 max-w-full sm:max-w-full">
+        <h1 className={`text-2xl sm:text-4xl ${styles.typing} animation-delay-500`}>Welcome to KAR Consultancy</h1>
+        <div className="w-full sm:w-1/3 mt-20">
+          <p className="text-xl sm:text-2xl animate-slideInFromBottom">Providing top-tier structural engineering and consultancy services, specializing in innovative solutions for commercial, residential, and industrial projects.</p>
+        </div>
       </div>
-    </main>
+      <div className="flex-grow mt-40 p-4">
+        {/* Add content that will animate in as the user scrolls */}
+        fjhdfgjlk
+        <div className={`section ${styles.animateSlideInFromBottom}`}>
+          <Image src="/small-image-1.jpeg" alt="Expertise" width={200} height={200}/>
+          <div className="section-content">
+            <h2 className="text-2xl font-bold mb-4">Our Expertise</h2>
+            <p>We specialize in structural engineering, offering solutions that are innovative, reliable, and sustainable.</p>
+          </div>
+        </div>
+        <div className={`section ${styles.animateSlideInFromBottom}`}>
+          <Image src="/small-image-2.jpg" alt="Why Choose Us" width={200} height={200}/>
+          <div className="section-content">
+            <h2 className="text-2xl font-bold mb-4">Why Choose Us</h2>
+            <p>With years of experience and a commitment to excellence, we deliver top-tier consultancy services tailored to your needs.</p>
+          </div>
+        </div>
+        <div className={`section ${styles.animateSlideInFromBottom}`}>
+          <Image src="/small-image-3.jpg" alt="Our Vision" width={200} height={200}/>
+          <div className="section-content">
+            <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
+            <p>We aim to build strength and engineer excellence in every project we undertake.</p>
+          </div>
+        </div>
+      </div>
+     
+    </div>
   );
 }
